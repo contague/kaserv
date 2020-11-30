@@ -20,22 +20,27 @@ class InfoBlock extends Component{
 
     async getData(id) {
         let out = [];
+        let idBody = {
+            id: id
+        };
+        let jsonBody = JSON.stringify(idBody);
         const options = {
             method: 'post',
             headers: {
-                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" },
-            body: "id=" + id
+                "Content-type": "application/json; charset=UTF-8",
+                "Accept": "application/json"},
+            body: jsonBody
         };
 
         let resp = await fetch("infoBlock", options);
         let data = await resp.json();
         await this.setState({data: data});
-        for (let i = 0; i < data.list.length; i++){
-            if (data.list[i].type === "1") {
-                out.push(<Text text={data.list[i].data}/>);
+        for (let i = 0; i < data.length; i++){
+            if (data[i].type === "1") {
+                out.push(<Text text={data[i].data}/>);
             }
-            else if(data.list[i].type === "2"){
-                out.push(<PrintImg printImg={data.list[i]}/>);
+            else if(data[i].type === "2"){
+                out.push(<PrintImg printImg={data[i]}/>);
 
             }
         }

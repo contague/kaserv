@@ -13,11 +13,17 @@ class GetStatus extends Component{
     async getStatusFromServer(){
         let surname = this.props.name;
         let number = this.props.number;
+        let statusBody = {
+            surname: surname,
+            number: number
+        }
+        let jsonStatus = JSON.stringify(statusBody);
         const options = {
             method: 'post',
             headers: {
-                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" },
-            body: "surname=" + surname + "&number=" + number
+                "Content-type": "application/json; charset=UTF-8",
+                "Accept": "application/json"},
+            body: jsonStatus
         };
         if ((surname !== "" && number !== "") || (surname !== undefined && number !== undefined)){
             this.setState({printStatus:

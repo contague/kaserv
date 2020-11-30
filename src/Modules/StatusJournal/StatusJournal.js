@@ -45,11 +45,18 @@ class StatusJournal extends Component{
                     <Loader inverted content='Loading' />
                 </Dimmer>
         });
+        let statusJournalBody = {
+            firstDate: this.state.array[0],
+            secondDate: this.state.array[1],
+            option: this.state.array[2]
+        }
+        let jsonStatusJournal = JSON.stringify(statusJournalBody);
         const options = {
             method: 'post',
             headers: {
-                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" },
-            body: "firstDate=" + this.state.array[0] + "&secondDate=" + this.state.array[1] + "&option=" + this.state.array[2]
+                "Content-type": "application/json; charset=UTF-8",
+                "Accept": "application/json"},
+            body: jsonStatusJournal
         };
         let resp = await fetch("statusJournal", options);
         if (resp.ok) {

@@ -18,12 +18,18 @@ class LoginApp extends Component{
         let pass = this._passElement.value;
         let sha1 = require('sha1');
         let hashPass = sha1(pass).toUpperCase();
+        let loginBody = {
+            log: log,
+            pass: hashPass
+        }
+        let jsonPass = JSON.stringify(loginBody)
 
         const options = {
             method: 'post',
             headers: {
-                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" },
-            body: "log=" + log + "&pass=" + hashPass
+                "Content-type": "application/json; charset=UTF-8",
+                "Accept": "application/json"},
+            body: jsonPass
         };
         if (log !== "" && pass !== ""){
             let resp = await fetch("login", options);

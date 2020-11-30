@@ -4,8 +4,9 @@ async function getData() {
     let response = await fetch(url);
 
     if (response.ok) {
+
         let json = await response.json();
-        list = await json.list;
+        list = await json;
     }
     return list;
 }

@@ -24,11 +24,16 @@ class ChangePass extends Component{
     }
 
     async sendChange(pass, checkPass, encodePass) {
+        let passBody = {
+            pass: encodePass
+        }
+        let jsonPass = JSON.stringify(passBody);
         const options = {
             method: 'post',
             headers: {
-                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" },
-            body: "pass=" + encodePass
+                "Content-type": "application/json; charset=UTF-8",
+                "Accept": "application/json"},
+            body: jsonPass
         };
         if ((pass !== "" && checkPass !== "") && (pass === checkPass)){
             let resp = await fetch("changePass", options);

@@ -36,7 +36,7 @@ class JournalTable extends Component{
     createTable(){
 
         let printRow = [];
-        let list = this.state.dataFromOut.list;
+        let list = this.state.dataFromOut;
         console.log(list);
         console.log(list.length);
         if (list.length !== 0) {
